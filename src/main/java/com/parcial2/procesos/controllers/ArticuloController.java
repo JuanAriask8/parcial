@@ -1,10 +1,10 @@
 package com.parcial2.procesos.controllers;
 
 
-import com.example.primer_parcial.models.Articulo;
-import com.example.primer_parcial.repository.ArticuloRepository;
-import com.example.primer_parcial.services.ArticuloService;
-import com.example.primer_parcial.utils.JWTUtil;
+import com.parcial2.procesos.models.Articulo;
+import com.parcial2.procesos.repository.ArticuloRepository;
+import com.parcial2.procesos.services.ArticuloService;
+import com.parcial2.procesos.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

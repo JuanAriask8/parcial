@@ -1,7 +1,7 @@
 package com.parcial2.procesos.controllers;
 
-import com.example.primer_parcial.models.Usuario;
-import com.example.primer_parcial.services.UsuarioService;
+import com.parcial2.procesos.models.Usuario;
+import com.parcial2.procesos.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

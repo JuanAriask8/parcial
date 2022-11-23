@@ -1,7 +1,7 @@
 package com.parcial2.procesos.services;
 
-import com.example.primer_parcial.models.Categoria;
-import com.example.primer_parcial.repository.CategoriaRepository;
+import com.parcial2.procesos.models.Categoria;
+import com.parcial2.procesos.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

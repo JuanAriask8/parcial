@@ -1,7 +1,7 @@
 package com.parcial2.procesos.services;
 
 
-import com.example.primer_parcial.models.Usuario;
+import com.parcial2.procesos.models.Usuario;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

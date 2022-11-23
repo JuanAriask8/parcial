@@ -7,10 +7,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class PrimerParcialApplication {
+public class ProcesosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PrimerParcialApplication.class, args);
+		SpringApplication.run(ProcesosApplication.class, args);
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder(){

@@ -1,6 +1,6 @@
 package com.parcial2.procesos.services;
 
-import com.example.primer_parcial.models.Categoria;
+import com.parcial2.procesos.models.Categoria;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 public interface CategoriaService {

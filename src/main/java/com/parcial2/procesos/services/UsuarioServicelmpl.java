@@ -1,8 +1,8 @@
 package com.parcial2.procesos.services;
 
-import com.example.primer_parcial.models.Usuario;
-import com.example.primer_parcial.repository.UsuarioRepository;
-import com.example.primer_parcial.utils.JWTUtil;
+import com.parcial2.procesos.models.Usuario;
+import com.parcial2.procesos.repository.UsuarioRepository;
+import com.parcial2.procesos.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

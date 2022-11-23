@@ -1,6 +1,6 @@
 package com.parcial2.procesos.repository;
 
-import com.example.primer_parcial.models.Articulo;
+import com.parcial2.procesos.models.Articulo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
