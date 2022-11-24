@@ -42,14 +42,6 @@ public class UsuarioController {
     }
 
 
-    @GetMapping("/usuario/nombre/{nombre}")
-    public ResponseEntity listaPorNombre(@PathVariable String nombre,@RequestHeader(value = "Authorization") String token ) {
-        if(jwtUtil.getKey(token) == null){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
-        }
-        return usuarioService.allUsersByName(nombre);
-    }
-
 
 
     @PutMapping("/usuario/{id}")

@@ -1,6 +1,7 @@
 package com.procesos.negocio.brainer.models;
 
 
+import jdk.nashorn.internal.runtime.Debug;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,6 @@ public class Categoria {
     private String nombre;
     @Column (length = 100,nullable = false)
     private String descripcion;
+
+
 }

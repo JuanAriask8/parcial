@@ -20,6 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Override
     public ResponseEntity<Usuario> getUserById(Long id) {
         Optional<Usuario> usuario= usuarioRepository.findById(id);
