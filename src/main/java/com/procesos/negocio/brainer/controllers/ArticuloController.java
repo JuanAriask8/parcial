@@ -1,14 +1,12 @@
 package com.procesos.negocio.brainer.controllers;
 
 import com.procesos.negocio.brainer.models.Articulo;
-import com.procesos.negocio.brainer.repository.ArticuloRepository;
+import com.procesos.negocio.brainer.utils.JWTUtil;
+import com.procesos.negocio.brainer.services.ArticuloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,89 +14,71 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticuloController {
 
     @Autowired
-    private ArticuloRepository articuloRepository;
+    private ArticuloService articuloService;
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @PostMapping("/articulo")
-    public ResponseEntity crearArticulo(@RequestBody Articulo articulo){
+    public ResponseEntity crearArticulo(@RequestBody Articulo articulo,@RequestHeader(value = "Authorization") String token){
         try {
-            articuloRepository.save(articulo);
-            return new ResponseEntity(articulo, HttpStatus.CREATED);
+            if(jwtUtil.getKey(token) == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
+            }
+            return articuloService.createArticulo(articulo);
         }catch (Exception e){
-            return ResponseEntity.badRequest().build();
-
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
         }
-
-
 
     }
     @GetMapping("/articulo/{codigo}")
-    public ResponseEntity listaPorCodigo(@PathVariable String codigo){
-        Optional<Articulo> articulos= articuloRepository.findByCodigo(codigo);
-        if(!articulos.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
-        return new ResponseEntity(articulos,HttpStatus.OK);
-    }
-
-    @PutMapping("/articulo/{codigo}")
-    public ResponseEntity modificarArticulo(@PathVariable String codigo, @RequestBody Articulo articulo) {
-        Optional<Articulo> articuloBD= articuloRepository.findByCodigo(codigo);
-        if (articuloBD.isPresent()) {
-            try {
-                articuloBD.get().setCodigo(articulo.getCodigo());
-                articuloBD.get().setNombre(articulo.getNombre());
-                articuloBD.get().setDescripcion(articulo.getDescripcion());
-                articuloBD.get().setFecha_registro(articulo.getFecha_registro());
-                articuloBD.get().setStock(articulo.getStock());
-                articuloBD.get().setCategoria(articulo.getCategoria());
-                articuloBD.get().setPrecio_venta(articulo.getPrecio_venta());
-                articuloBD.get().setPrecio_compra(articulo.getPrecio_compra());
-
-                articuloRepository.save(articuloBD.get());
-                return new ResponseEntity(articuloBD, HttpStatus.OK);
-
-            } catch (Exception e) {
-                return ResponseEntity.badRequest().build();
-
+    public ResponseEntity listaPorCodigo(@PathVariable String codigo,@RequestHeader(value = "Authorization") String token){
+        try {
+            if(jwtUtil.getKey(token) == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
             }
-
-
-
-
+            return articuloService.getArticuloByCodigo(codigo);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
         }
-        return ResponseEntity.notFound().build();
-
 
     }
+
+   /* @PutMapping("/articulo/{codigo}")
+    public ResponseEntity modificarArticulo(@PathVariable String codigo, @RequestBody Articulo articulo,@RequestHeader(value = "Authorization") String token) {
+        try {
+            if(jwtUtil.getKey(token) == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
+            }
+            return articuloService.editArticulo(codigo,articulo);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
+        }
+
+    }*/
 
     @DeleteMapping("/articulo/{codigo}")
-    public ResponseEntity eliminarArticulo(@PathVariable String codigo){
-        Optional<Articulo> articuloBD = articuloRepository.findByCodigo(codigo);
-        if(articuloBD.isPresent()){
-            articuloRepository.delete(articuloBD.get());
-            return  ResponseEntity.noContent().build();
-
+    public ResponseEntity eliminarArticulo(@PathVariable String codigo,@RequestHeader(value = "Authorization") String token){
+        try {
+            if(jwtUtil.getKey(token) == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
+            }
+            return articuloService.deleteArticuloByCodigo(codigo);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
+        }
+    }
+   /* @GetMapping("/articulos")
+    public ResponseEntity listarArticulo(@RequestHeader(value = "Authorization") String token){
+        try {
+            if(jwtUtil.getKey(token) == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
+            }
+            return articuloService.allArticulos();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token incorrecto");
         }
 
-
-        return ResponseEntity.notFound().build();
-    }
-    @GetMapping("/articulos")
-    public ResponseEntity listarArticulo(){
-
-        List<Articulo> articulos= articuloRepository.findAll();
-        if(articulos.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return new ResponseEntity(articulos,HttpStatus.OK);
-
-
-    }
-
-
+    }*/
 
 
 }
-
-
-
